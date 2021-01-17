@@ -19,7 +19,7 @@ Engine_Boomtick : CroneEngine {
 		this.addCommand("boom", "", { Synth.new(\boom, target:s); });
 		this.addCommand("tick", "", { Synth.new(\tick, target:s); });
 		this.addCommand("ping", "f", { arg msg;
-			Synth.new(\boom, [\hz, msg[1], \rel, 0.25], target:s);
+			Synth.new(\boom, [\hz, msg[1], \rel, 0.2, \pan, 0.0], target:s);
 		});
 	}
 	

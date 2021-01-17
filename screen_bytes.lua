@@ -33,6 +33,7 @@ end
 function redraw()
   if clear then screen.clear() end
   local n = w * h
+  -- FIXME: better to preallocate 
   local chars = {}
   local val = 0
   for i=1, n do

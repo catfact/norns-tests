@@ -179,7 +179,7 @@ key_fn = {
     if run_screen then run_screen= false; screen_metro:stop() 
     else run_screen = true; screen_metro:start() end
   end,
-  function()
+  function() 
     -- k3: toggle sound
     if run_sound then run_sound= false; sound_metro:stop() 
     else run_screen = true; sound_metro:start() end
@@ -195,6 +195,7 @@ end
 --- ye init
 
 function init()
+  
   init_pixels()
   screen_metro = metro.init({
 	event = function()
@@ -203,7 +204,7 @@ function init()
 	   dt = util.time() - t
 	 end,
 	 time = 1/12
-   }):start()
+   })
  
   midi_device = midi.connect()
   midi_device.event = function(data)
@@ -215,5 +216,14 @@ function init()
 
   params:set("reverb", 1)
   local sound_metro = metro.init(main, 60 / (bpm * 4), -1)
+
+  params:add{type="number",id="bpm",min=100, max=300, default=120,
+     action=function(x) sound_metro.time = 60/(x*4) end}
+  
+  params:add{type="number",id="fps",min=1, max=50, default=15,
+    action=function(x) screen_metro.time = 1/(x) end}
+
   sound_metro:start()
+  screen_metro:start()
+
 end
